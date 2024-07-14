@@ -58,21 +58,21 @@ namespace PhoneDirectory.Repositories
             }
         }
 
-        public async Task AddDepartmentAsync(Department departmentDto)
+        public async Task AddDepartmentAsync(Department department)
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
                 using (var command = new NpgsqlCommand("INSERT INTO departments (name, parent_id) VALUES (@name, @parentId)", connection))
                 {
-                    command.Parameters.AddWithValue("name", departmentDto.Name);
-                    command.Parameters.AddWithValue("parentId", departmentDto.ParentId ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("name", department.Name);
+                    command.Parameters.AddWithValue("parentId", department.ParentId ?? (object)DBNull.Value);
                     await command.ExecuteNonQueryAsync();
                 }
             }
         }
 
-        public async Task UpdateDepartmentAsync(int id, Department departmentDto)
+        public async Task UpdateDepartmentAsync(int id, Department department)
         {
             using (var connection = new NpgsqlConnection(_connectionString))
             {
@@ -80,8 +80,8 @@ namespace PhoneDirectory.Repositories
                 using (var command = new NpgsqlCommand("UPDATE departments SET name = @name, parent_id = @parentId WHERE id = @id", connection))
                 {
                     command.Parameters.AddWithValue("id", id);
-                    command.Parameters.AddWithValue("name", departmentDto.Name);
-                    command.Parameters.AddWithValue("parentId", departmentDto.ParentId ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("name", department.Name);
+                    command.Parameters.AddWithValue("parentId", department.ParentId ?? (object)DBNull.Value);
                     await command.ExecuteNonQueryAsync();
                 }
             }

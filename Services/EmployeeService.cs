@@ -32,14 +32,14 @@ namespace PhoneDirectory.Services
             return _employeeRepository.SearchEmployeesAsync(searchText);
         }
 
-        public Task AddEmployeeAsync(Employee employeeDto)
+        public Task AddEmployeeAsync(Employee employee)
         {
-            return _employeeRepository.AddEmployeeAsync(employeeDto);
+            return _employeeRepository.AddEmployeeAsync(employee);
         }
 
-        public Task UpdateEmployeeAsync(int id, Employee employeeDto)
+        public Task UpdateEmployeeAsync(int id, Employee employee)
         {
-            return _employeeRepository.UpdateEmployeeAsync(id, employeeDto);
+            return _employeeRepository.UpdateEmployeeAsync(id, employee);
         }
 
         public Task DeleteEmployeeAsync(int id)

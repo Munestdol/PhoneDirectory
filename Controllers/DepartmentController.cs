@@ -34,21 +34,21 @@ namespace PhoneDirectory.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> AddDepartment(Department departmentDto)
+        public async Task<ActionResult> AddDepartment(Department department)
         {
-            await _departmentService.AddDepartmentAsync(departmentDto);
+            await _departmentService.AddDepartmentAsync(department);
             return Ok();
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult> UpdateDepartment(int id, Department departmentDto)
+        public async Task<ActionResult> UpdateDepartment(int id, Department department)
         {
-            if (id != departmentDto.Id)
+            if (id != department.Id)
             {
                 return BadRequest("Department ID mismatch");
             }
 
-            await _departmentService.UpdateDepartmentAsync(id, departmentDto);
+            await _departmentService.UpdateDepartmentAsync(id, department);
             return Ok();
         }
 

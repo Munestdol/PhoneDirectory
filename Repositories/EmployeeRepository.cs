@@ -107,27 +107,27 @@ namespace PhoneDirectory.Repositories
             return employees;
         }
 
-        public async Task AddEmployeeAsync(Employee employeeDto)
+        public async Task AddEmployeeAsync(Employee employee)
         {
             var command = new NpgsqlCommand("INSERT INTO Employees (Name, Position, phone_number, department_id) VALUES (@name, @position, @phoneNumber, @departmentId)", _connection);
-            command.Parameters.AddWithValue("name", employeeDto.Name);
-            command.Parameters.AddWithValue("position", employeeDto.Position);
-            command.Parameters.AddWithValue("phoneNumber", employeeDto.PhoneNumber);
-            command.Parameters.AddWithValue("departmentId", employeeDto.DepartmentId);
+            command.Parameters.AddWithValue("name", employee.Name);
+            command.Parameters.AddWithValue("position", employee.Position);
+            command.Parameters.AddWithValue("phoneNumber", employee.PhoneNumber);
+            command.Parameters.AddWithValue("departmentId", employee.DepartmentId);
 
             await _connection.OpenAsync();
             await command.ExecuteNonQueryAsync();
             await _connection.CloseAsync();
         }
 
-        public async Task UpdateEmployeeAsync(int id, Employee employeeDto)
+        public async Task UpdateEmployeeAsync(int id, Employee employee)
         {
             var command = new NpgsqlCommand("UPDATE Employees SET Name = @name, Position = @position, phone_number = @phoneNumber, department_id = @departmentId WHERE Id = @id", _connection);
             command.Parameters.AddWithValue("id", id);
-            command.Parameters.AddWithValue("name", employeeDto.Name);
-            command.Parameters.AddWithValue("position", employeeDto.Position);
-            command.Parameters.AddWithValue("phoneNumber", employeeDto.PhoneNumber);
-            command.Parameters.AddWithValue("departmentId", employeeDto.DepartmentId);
+            command.Parameters.AddWithValue("name", employee.Name);
+            command.Parameters.AddWithValue("position", employee.Position);
+            command.Parameters.AddWithValue("phoneNumber", employee.PhoneNumber);
+            command.Parameters.AddWithValue("departmentId", employee.DepartmentId);
 
             await _connection.OpenAsync();
             await command.ExecuteNonQueryAsync();

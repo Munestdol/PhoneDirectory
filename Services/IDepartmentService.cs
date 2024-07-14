@@ -6,8 +6,8 @@ namespace PhoneDirectory.Services
     {
         Task<IEnumerable<Department>> GetDepartmentsAsync();
         Task<Department> GetDepartmentByIdAsync(int id);
-        Task AddDepartmentAsync(Department departmentDto);
-        Task UpdateDepartmentAsync(int id, Department departmentDto);
+        Task AddDepartmentAsync(Department department);
+        Task UpdateDepartmentAsync(int id, Department department);
         Task DeleteDepartmentAsync(int id);
         Task<IEnumerable<Department>> GetSubDepartmentsAsync(int id);
     }

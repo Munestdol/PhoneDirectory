@@ -22,14 +22,14 @@ namespace PhoneDirectory.Services
             return await _departmentRepository.GetDepartmentByIdAsync(id);
         }
 
-        public async Task AddDepartmentAsync(Department departmentDto)
+        public async Task AddDepartmentAsync(Department department)
         {
-            await _departmentRepository.AddDepartmentAsync(departmentDto);
+            await _departmentRepository.AddDepartmentAsync(department);
         }
 
-        public async Task UpdateDepartmentAsync(int id, Department departmentDto)
+        public async Task UpdateDepartmentAsync(int id, Department department)
         {
-            await _departmentRepository.UpdateDepartmentAsync(id, departmentDto);
+            await _departmentRepository.UpdateDepartmentAsync(id, department);
         }
 
         public async Task DeleteDepartmentAsync(int id)

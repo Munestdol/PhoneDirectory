@@ -48,21 +48,21 @@ namespace PhoneDirectory.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddEmployee(Employee employeeDto)
+        public async Task<IActionResult> AddEmployee(Employee employee)
         {
-            await _employeeService.AddEmployeeAsync(employeeDto);
-            return CreatedAtAction(nameof(GetEmployeeById), new { id = employeeDto.Id }, employeeDto);
+            await _employeeService.AddEmployeeAsync(employee);
+            return CreatedAtAction(nameof(GetEmployeeById), new { id = employee.Id }, employee);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateEmployee(int id, Employee employeeDto)
+        public async Task<IActionResult> UpdateEmployee(int id, Employee employee)
         {
-            if (id != employeeDto.Id)
+            if (id != employee.Id)
             {
                 return BadRequest();
             }
 
-            await _employeeService.UpdateEmployeeAsync(id, employeeDto);
+            await _employeeService.UpdateEmployeeAsync(id, employee);
             return NoContent();
         }
 
