@@ -9,5 +9,6 @@ namespace PhoneDirectory.Repositories
         Task AddDepartmentAsync(Department departmentDto);
         Task UpdateDepartmentAsync(int id, Department departmentDto);
         Task DeleteDepartmentAsync(int id);
+        Task <IEnumerable<Department>> GetSubDepartmentsAsync(int id);
     }
 }

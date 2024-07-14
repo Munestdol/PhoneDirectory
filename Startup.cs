@@ -14,13 +14,15 @@ namespace PhoneDirectory
         }
 
         public void ConfigureServices(IServiceCollection services)
-        {
-            // Регистрация NpgsqlConnection
+        {          
             services.AddTransient<NpgsqlConnection>(sp =>
             {
                 var connectionString = Configuration.GetConnectionString("DefaultConnection");
                 return new NpgsqlConnection(connectionString);
             });
+
+            services.AddTransient<IDepartmentRepository, DepartmentRepository>();
+            services.AddTransient<IDepartmentService, DepartmentService>();
 
             services.AddTransient<IEmployeeRepository, EmployeeRepository>();
             services.AddTransient<IEmployeeService, EmployeeService>();

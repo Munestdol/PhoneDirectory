@@ -99,5 +99,30 @@ namespace PhoneDirectory.Repositories
                 }
             }
         }
+
+        public async Task<IEnumerable<Department>> GetSubDepartmentsAsync(int id)
+        {
+            using (var connection = new NpgsqlConnection(_connectionString))
+            {
+                var departments = new List<Department>();
+                var command = new NpgsqlCommand("SELECT * FROM Departments WHERE parent_id = @id", connection);
+                command.Parameters.AddWithValue("id", id);
+
+                await connection.OpenAsync();
+                var reader = await command.ExecuteReaderAsync();
+                while (await reader.ReadAsync())
+                {
+                    departments.Add(new Department()
+                    {
+                        Id = reader.GetInt32(0),
+                        Name = reader.GetString(1),
+                        ParentId = reader.IsDBNull(2) ? (int?)null : reader.GetInt32(2)
+                    });
+                }
+                await connection.CloseAsync();
+
+                return departments;
+            }
+        }
     }
 }

@@ -58,5 +58,12 @@ namespace PhoneDirectory.Controllers
             await _departmentService.DeleteDepartmentAsync(id);
             return Ok();
         }
+
+        [HttpGet("{id}/subdepartments")]
+        public async Task<ActionResult> GetSubDepartments(int id)
+        {
+            var subDepartments = await _departmentService.GetSubDepartmentsAsync(id);
+            return Ok(subDepartments);
+        }
     }
 }

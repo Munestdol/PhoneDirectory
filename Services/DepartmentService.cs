@@ -36,5 +36,11 @@ namespace PhoneDirectory.Services
         {
             await _departmentRepository.DeleteDepartmentAsync(id);
         }
+
+        public async Task<IEnumerable<Department>> GetSubDepartmentsAsync(int id)
+        {
+            return await _departmentRepository.GetSubDepartmentsAsync(id);
+        }
+
     }
 }
