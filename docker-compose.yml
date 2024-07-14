@@ -7,12 +7,12 @@ services:
     ports:
       - "5000:80"
     environment:
-      - ConnectionStrings__DefaultConnection=Host=localhost;Database=phonedirectory;Username=postgres;Password=12345678
+      - ConnectionStrings__DefaultConnection=Host=db;Database=phonedirectory;Username=postgres;Password=12345678
     depends_on:
-      - phone-directory-db
+      - db
 
-  phone-directory-db:
-    image: postgres:13
+  db:
+    image: postgres:latest
     environment:
       POSTGRES_DB: phonedirectory
       POSTGRES_USER: postgres
@@ -20,7 +20,8 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - phone-directory-db-data:/var/lib/postgresql/data
+      - db-data:/var/lib/postgresql/data
+      - ./migration:/docker-entrypoint-initdb.d
 
 volumes:
-  phone-directory-db-data:
+  db-data:
