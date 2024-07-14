@@ -1,0 +1,26 @@
+services:
+  phone-directory-app:
+    image: phone-directory-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5000:80"
+    environment:
+      - ConnectionStrings__DefaultConnection=Host=localhost;Database=phonedirectory;Username=postgres;Password=12345678
+    depends_on:
+      - phone-directory-db
+
+  phone-directory-db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: phonedirectory
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345678
+    ports:
+      - "5432:5432"
+    volumes:
+      - phone-directory-db-data:/var/lib/postgresql/data
+
+volumes:
+  phone-directory-db-data:
